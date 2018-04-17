@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<a href="/add">Add Car</a>
+<table>
+    <tr th:each="eachCar : ${cars}">
+        <td th:text="${eachCar.brand}"></td>
+        <td th:text="${eachCar.model}"></td>
+        <td th:text="${eachCar.color}"></td>
+        <td th:text="${eachCar.available}?'Available' : 'CheckedOut' "></td>
+        <td th:text="${eachCar.available}?'Return': 'CheckedOut'" th:href="@{/changestatus/{id}(id=${eachCar.id})}"></td>
+        <td>
+            <img th:src="${eachCar.image}" alt="no image">
+        </td>
+        <td>
+            <a th:href="@{/update/{id}(id=${eachCar.id})}">Update</a>-
+            <a th:href="@{/detail/{id}(id=${eachCar.id})}">Details</a>-
+            <a th:href="@{/delete/{id}(id=${eachCar.id})}">Delete</a>-
+        </td>
+    </tr>
+</table>
+</body>
+</html>

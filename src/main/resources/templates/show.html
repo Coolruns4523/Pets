@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/">Show All Cars</a><br/>
+Brand:<span th:text="${aCar.brand}"></span><br/>
+Model:<span th:text="${aCar.model}"></span><br/>
+Color:<span th:text="${aCar.color}"></span><br/>
+Available:<span th:text="${aCar.available}"></span><br/>
+<a th:href="@{/delete/{id}(id=${eachCar.id})}">Delete this Car</a>
+</body>
+</html>
