@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        img {
+            width:100%;
+        }
+    </style>
+</head>
+<body style="background-image:url('http://mixedpet.com/wp/wp-content/uploads/lost-pet.jpg')">
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">Lost Pets</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="http://localhost:8080/homepage">Home</a></li>
+            <li><a href="http://localhost:8080/add">Report Animal</a></li>
+            <li><a href="http://localhost:8080/add">Show Status</a></li>
+        </ul>
+    </div>
+</nav>
+<form action="#" th:action="@{/savepet}" th:object="${aPet}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="container-fluid">
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <p style="color:white">Name:</p><input class="form-control" type="text" th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}"
+          th:errors="*{name}"></span><br/>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <p style="color:white">Description:</p><input class="form-control" type="text" th:field="*{description}"/>
+    <span th:if="${#fields.hasErrors('description')}"
+          th:errors="*{description}"></span><br/>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <p style="color:white">Type of Animal:</p><input class="form-control" type="text" th:field="*{typeOfAnimal}"/>
+    <span th:if="${#fields.hasErrors('typeOfAnimal')}"
+          th:errors="*{typeOfAnimal}"></span><br/>
+        </div>
+    </div>
+        <p style="color:white">Lost:</p><input type="checkbox" th:field="*{lost}" />
+        <p style="color:white">Found:</p><input type="checkbox" th:field="*{found}"/>
+    <button type ="submit">Add a Pet</button>
+    </div>
+</form>
+</body>
+</html>

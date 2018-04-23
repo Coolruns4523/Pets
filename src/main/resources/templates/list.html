@@ -3,25 +3,41 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 </head>
 <body>
-<a href="/add">Add Car</a>
-<table>
-    <tr th:each="eachCar : ${cars}">
-        <td th:text="${eachCar.brand}"></td>
-        <td th:text="${eachCar.model}"></td>
-        <td th:text="${eachCar.color}"></td>
-        <td th:text="${eachCar.available}?'Available' : 'CheckedOut' "></td>
-        <td th:text="${eachCar.available}?'Return': 'CheckedOut'" th:href="@{/changestatus/{id}(id=${eachCar.id})}"></td>
+    <a class="btn btn=primary" href="/add">Add Pet</a>
+<table class="table table-dark">
+    <thread>
+        <tr>
+            <th scope="col">First</th>
+            <th scope="col">Description</th>
+            <th scope="col">Type of Animal</th>
+            <th scope="col">Lost</th>
+            <th scope="col">Found</th>
+            <th scope="col">Update PET Status</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thread>
+    <tbody>
+    <th scope="row">
+    <tr th:each="aPet : ${pets}">
+
+        <td th:text="${aPet.name}"></td>
+        <td th:text="${aPet.description}"></td>
+        <td th:text="${aPet.typeOfAnimal}"></td>
+        <td th:text="${aPet.lost}?'Lost'"></td>
+        <td th:text="${aPet.found}?'Found'"></td>
         <td>
-            <img th:src="${eachCar.image}" alt="no image">
+        <img th:src="${aPet.image}" alt="no image">
         </td>
-        <td>
-            <a th:href="@{/update/{id}(id=${eachCar.id})}">Update</a>-
-            <a th:href="@{/detail/{id}(id=${eachCar.id})}">Details</a>-
-            <a th:href="@{/delete/{id}(id=${eachCar.id})}">Delete</a>-
-        </td>
-    </tr>
+<td>
+    <a class="btn btn-primary" th:href="@{/update/{id}(id=${aPet.id})}">Update</a>
+    <a class="btn btn-primary"  th:href="@{/delete/{id}(id=${aPet.id})}">Delete</a>
+</td>
+    </tbody>
+</tr>
 </table>
 </body>
 </html>

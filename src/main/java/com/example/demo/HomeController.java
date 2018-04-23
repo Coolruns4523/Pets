@@ -11,64 +11,70 @@ import javax.validation.Valid;
 @Controller
 public class HomeController {
     @Autowired
-    CarRepository carRepository;
+    PetRepository petRepository;
+
+    @RequestMapping("/homepage")
+    public String homepage()
+    {
+        return "homepage";
+    }
 
     @RequestMapping("/")
-    public String listCars(Model model)
+    public String listPets(Model model)
     {
-        model.addAttribute("cars", carRepository.findAll());
+        model.addAttribute("pets", petRepository.findAll());
         return "list";
     }
 
 
     @GetMapping("/add")
-    public String carForm(Model model)
+    public String petForm(Model model)
     {
-        model.addAttribute("aCar", new Car());
-        return "carForm";
+        model.addAttribute("aPet", new Pet());
+        return "petForm";
     }
 
-    @PostMapping("/savecar")
-    public String saveCar(@Valid Car car, BindingResult result)
+    @PostMapping("/savepet")
+    public String savePet(@Valid Pet pet, BindingResult result)
     {
 
         if (result.hasErrors())
         {
-            return "carForm";
+            return "petForm";
         }
-        carRepository.save(car);
+        petRepository.save(pet);
         return "redirect:/";
     }
 
     @RequestMapping("/changestatus/{id}")
     public String notAvailable(@PathVariable("id")long id)
     {
-        Car thisCar = carRepository.findCarById(id);
-        thisCar.setAvailable(!thisCar.isAvailable());
-        carRepository.save(thisCar);
+        Pet thisPet = petRepository.findPetById(id);
+        thisPet.setFound(!thisPet.isFound());
+        petRepository.save(thisPet);
         return "redirect:/";
     }
 
 
     @RequestMapping("/detail/{id}")
-    public String showCar (@PathVariable("id") long id, Model model)
+    public String showPet (@PathVariable("id") long id, Model model)
     {
         /* bookRepository.findById(id).get()*/
-        model.addAttribute("aCar", carRepository.findCarById(id));
+        model.addAttribute("aPet", petRepository.findPetById(id));
         return "show";
     }
     @RequestMapping("/update/{id}")
-    public String updateCar (@PathVariable("id") long id, Model model)
+    public String updatePet (@PathVariable("id") long id, Model model)
     {
-        model.addAttribute("aCar", carRepository.findCarById(id));
-        return "carForm";
+        model.addAttribute("aPet", petRepository.findPetById(id));
+        return "petForm";
     }
 
 
     @RequestMapping("/delete/{id}")
-    public String delCar(@PathVariable("id") long id, Model model)
+    public String delPet(@PathVariable("id") long id, Model model)
     {
-        carRepository.deleteById(id);
+        petRepository.deleteById(id);
         return "redirect:/";
     }
 }
